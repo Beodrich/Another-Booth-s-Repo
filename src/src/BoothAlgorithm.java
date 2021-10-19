@@ -21,11 +21,11 @@ public class BoothAlgorithm {
         System.out.println("Hello Ben!");
 
         Scanner src= new Scanner(System.in);
-        System.out.println("Enter your first number");
+        System.out.println("Please Enter your first number");
         numberOne=src.nextInt();
-        System.out.println("Enter your second number");
+        System.out.println("Please Enter your second number");
         numberTwo=src.nextInt();
-        System.out.println("first number: "+ numberOne + "second number "+ numberTwo);
+        System.out.println("first number is: "+ numberOne + " second number is: "+ numberTwo);
         numOneAsString=ConvertIntToBinary(numberOne);
         numTwoAsString=ConvertIntToBinary(numberTwo);
 
