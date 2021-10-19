@@ -18,6 +18,7 @@ public class BoothAlgorithm {
        String numTwoAsString;
 
         System.out.println("hello cole");
+        System.out.println("Hello Ben!");
 
         Scanner src= new Scanner(System.in);
         System.out.println("Enter your first number");
