@@ -29,6 +29,12 @@ public class BoothAlgorithm {
         numOneAsString=ConvertIntToBinary(numberOne);
         numTwoAsString=ConvertIntToBinary(numberTwo);
 
+         System.out.println("first number as a binary number is: "+ numOneAsString +
+                 " second number a binary number is: "+ numTwoAsString);
+
+         System.out.println("Iteration    | Step        | Multiplicand      | Product");
+
+
 
     }
 }
