@@ -2,13 +2,24 @@ import java.util.Scanner;
 
 public class BoothAlgorithm {
     public static String ConvertIntToBinary(int number){
-        if(number>=0){
 
-        }
-        else{
+        // Built-In Java Function that converts int to a binary string
+        String result = Integer.toBinaryString(number);
 
+        String resultWithPadding = String.format("%4s", result).
+                replaceAll(" ", "0");  // 4-bit Integer
+
+        return  resultWithPadding;
+    }
+
+    public static void DisplayTable(String MCand)
+    {
+        System.out.println("Iteration | Step        | Multiplicand  | Product");
+        for(int i = 0; i <=8; i++)
+        {
+            System.out.println("_______________________________________________________");
+            System.out.println(i + "         | Step        | "+MCand+"          | Product");
         }
-        return null;
     }
 
      public static void main(String[] args) {
@@ -25,15 +36,18 @@ public class BoothAlgorithm {
         numberOne=src.nextInt();
         System.out.println("Please Enter your second number");
         numberTwo=src.nextInt();
-        System.out.println("first number is: "+ numberOne + " second number is: "+ numberTwo);
         numOneAsString=ConvertIntToBinary(numberOne);
         numTwoAsString=ConvertIntToBinary(numberTwo);
 
-         System.out.println("first number as a binary number is: "+ numOneAsString +
-                 " second number a binary number is: "+ numTwoAsString);
 
-         System.out.println("Iteration    | Step        | Multiplicand      | Product");
+        //numOneAsString = Integer.toBinaryString(numberOne);
+        //numTwoAsString = Integer.toBinaryString(numberTwo);
 
+         System.out.println("first number "+ numberOne+" as a binary number is: "+ numOneAsString +
+                 " and the second number "+ numberTwo+" a binary number is: "+ numTwoAsString);
+
+
+        DisplayTable(numOneAsString);
 
 
     }
