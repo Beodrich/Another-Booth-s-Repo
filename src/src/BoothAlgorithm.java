@@ -93,11 +93,27 @@ public class BoothAlgorithm {
         return twoComplement;
 
     }
+    public static void ShiftRight(int[] firstNumber, int[] secondNumber){
+        int signNumber= firstNumber[0];
+        int carryOverNumber=firstNumber[firstNumber.length-1];
+        System.out.println("first number after shift ");
+        for(int i=0; i<firstNumber.length-1; ++i){
+            firstNumber[i+1]=firstNumber[i];
+
+        }
+        firstNumber[0]=signNumber;
+       for (int i: firstNumber ){
+           System.out.print(i + " ");
+       }
+        System.out.println(" ");
+
+
+    }
     public static int[] Add(int [] firstBinaryNumber, int[] secondBinaryNumbers){
         int addedNumber[]= new int[8];
         int addedNumberIndex=0;
          boolean carry=false;
-        for(int i= firstBinaryNumber.length-1; i>0; --i){
+        for(int i= firstBinaryNumber.length-1; i>=0; --i){
             int firstNum=firstBinaryNumber[i];
             int secondNum= secondBinaryNumbers[i];
             if(firstNum==0 && secondNum==0){
@@ -223,6 +239,7 @@ public class BoothAlgorithm {
              System.out.print(i + " ");
 
          }
+         ShiftRight(numberOneAsBinary,numberTwoasBinary);
          System.out.println();
          System.out.println();
 
