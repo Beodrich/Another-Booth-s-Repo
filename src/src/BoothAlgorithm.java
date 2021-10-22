@@ -148,6 +148,7 @@ public class BoothAlgorithm {
         System.out.println("hello cole");
         System.out.println("Hello Ben!");
         System.out.println("I feel nothing but pain :)");
+        System.out.println("Turn to the Darkside young Padawan ;)");
 
         Scanner src= new Scanner(System.in);
         System.out.println("Please Enter the Multiplicand");
@@ -160,7 +161,7 @@ public class BoothAlgorithm {
          /*System.out.println("first number "+ numberOne+" as a binary number is: "+ numOneAsString +
                  " and the second number "+ numberTwo+" a binary number is: "+ numTwoAsString);*/
 
-       // DisplayTable(numOneAsString);
+         // DisplayTable(numOneAsString);
          //testing to make sure numbers work
          numberOneAsBinary=DetermineConversionFromUserNumber(numberOne);
          numberTwoasBinary= DetermineConversionFromUserNumber(numberTwo);
