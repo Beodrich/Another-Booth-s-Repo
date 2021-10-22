@@ -99,7 +99,7 @@ public class BoothAlgorithm {
        // System.out.println("first number after shift ");
         for(int i=0; i<firstNumber.length-1; ++i){
             firstNumber[i+1]=firstNumber[i];
-
+//
         }
         firstNumber[0]=signNumber;
        for (int i: firstNumber ){
