@@ -1,44 +1,35 @@
 import java.util.*;
 
 public class BoothAlgorithm {
-    public final int MAX_BIT=8;
+    public final int MAX_BIT = 8;
 
-    public static void Reverse(int[] arr){
-        int start=0;
-        int end= arr.length-1;
-        while (start<end){
-            int temp= arr[start];
-            arr[start]=arr[end];
-            arr[end]=temp;
+    public static void Reverse(int[] arr) {
+        int start = 0;
+        int end = arr.length - 1;
+        while (start < end) {
+            int temp = arr[start];
+            arr[start] = arr[end];
+            arr[end] = temp;
             ++start;
             --end;
         }
     }
 
-    public static int[] DetermineConversionFromUserNumber(int number){
-        if(number>=0){
-
-            int[] binary= ConvertIntToBinary(number);
+    public static int[] DetermineConversionFromUserNumber(int number) {
+        if (number >= 0) {
+            int[] binary = ConvertIntToBinary(number);
             Reverse(binary);
             return binary;
-        }
-        else{
-            int[] binary= ConvertIntToBinary(number*-1);
-             binary= NumberInTwoComplement(binary);
+        } else {
+            int[] binary = ConvertIntToBinary(number * -1);
+            binary = NumberInTwoComplement(binary);
             Reverse(binary);
             return binary;
         }
     }
 
-    public static int[] NumberInTwoComplement(int[] twoComplement){
+    public static int[] NumberInTwoComplement(int[] twoComplement) {
         //assume is postive for now then change the bits later
-        //System.out.println("Number after conversion");
-        /*
-        for(int i: twoComplement){
-            System.out.print(i + " ");
-        }
-        System.out.println();
-        */
         //flip the bits :)
         for(int i=0; i<twoComplement.length;++i){
             if(twoComplement[i]==0){
@@ -47,157 +38,159 @@ public class BoothAlgorithm {
             else{
                 twoComplement[i]=0;
             }
-           // System.out.print(twoComplement[i]+ " ");
         }
-        //System.out.println();
-        boolean carry=true;
+        boolean carry = true;
         //do the magic of adding
-        int firstNumber= twoComplement[0];
-        if(firstNumber==0){
-            carry=false;
+        int firstNumber = twoComplement[0];
+        if (firstNumber == 0) {
+            carry = false;
+        } else {
+            twoComplement[0] = 0;
+            carry = true;
         }
-        else{
-            twoComplement[0]=0;
-            carry=true;
-        }
-        for(int i=1; i<twoComplement.length && carry;++i){
-            int currentNumber= twoComplement[i];
-            if(currentNumber==0){
-                if(carry){
-                    carry=false;
-                    twoComplement[i]=1;
+        for (int i = 1; i < twoComplement.length && carry; ++i) {
+            int currentNumber = twoComplement[i];
+            if (currentNumber == 0) {
+                if (carry) {
+                    carry = false;
+                    twoComplement[i] = 1;
                 }
-            }
-            else{
-                if(carry){
-                    twoComplement[i]=0;
-                    carry=true;
-                }
-                else{
-                    twoComplement[i]=1;
-                    carry=false;
+            } else {
+                if (carry) {
+                    twoComplement[i] = 0;
+                    carry = true;
+                } else {
+                    twoComplement[i] = 1;
+                    carry = false;
                 }
             }
         }
         return twoComplement;
     }
+    // Shifts the 2 int arrays over (Product) over ASR 1
+    public static void ShiftRight( int[] firstNumber, int[] secondNumber){
+        int signNumber = firstNumber[0];
+        int carryOverNumber = firstNumber[firstNumber.length - 1];
 
-    public static void ShiftRight(int[] firstNumber, int[] secondNumber){
-        int signNumber= firstNumber[0];
-        int carryOverNumber=firstNumber[firstNumber.length-1];
-        System.out.println("first number after shift ");
-        for(int i=0; i<firstNumber.length-1; ++i){
-            firstNumber[i+1]=firstNumber[i];
+        for (int i = firstNumber.length - 1; i >= 1; i--) {
+            firstNumber[i] = firstNumber[i - 1];
         }
-        firstNumber[0]=signNumber;
-        //for (int i: firstNumber ){
-            //System.out.print(i + " ");
-        //}
-        //System.out.println(" ");
-       for(int i=0; i<secondNumber.length-1;++i){
+        firstNumber[0] = signNumber;
+        for (int i : firstNumber) {
+            System.out.print(i + " ");
+        }
+        System.out.print(" ");
 
-       }
+        for (int i = secondNumber.length - 1; i >= 1; i--) {
+            secondNumber[i] = secondNumber[i - 1];
+        }
+        secondNumber[0] = carryOverNumber;
+        for (int i : secondNumber) {
+            System.out.print(i + " ");
+        }
     }
 
-    public static int[] Add(int [] firstBinaryNumber, int[] secondBinaryNumbers){
-        int addedNumber[]= new int[8];
-        int addedNumberIndex=0;
-         boolean carry=false;
-        for(int i= firstBinaryNumber.length-1; i>=0; --i){
-            int firstNum=firstBinaryNumber[i];
-            int secondNum= secondBinaryNumbers[i];
-            if(firstNum==0 && secondNum==0){
-                if(carry){
-                    addedNumber[addedNumberIndex++]=1;
-                    carry=false;
+    public static int[] Add ( int[] firstBinaryNumber, int[] secondBinaryNumbers){
+        int addedNumber[] = new int[8];
+        int addedNumberIndex = 0;
+        boolean carry = false;
+        for (int i = firstBinaryNumber.length - 1; i >= 0; --i) {
+            int firstNum = firstBinaryNumber[i];
+            int secondNum = secondBinaryNumbers[i];
+            if (firstNum == 0 && secondNum == 0) {
+                if (carry) {
+                    addedNumber[addedNumberIndex++] = 1;
+                    carry = false;
+                } else {
+                    addedNumber[addedNumberIndex++] = 0;
+                    carry = false;
                 }
-                else{
-                    addedNumber[addedNumberIndex++]=0;
-                    carry=false;
+            } else if ((firstNum == 1 && secondNum == 0) || (secondNum == 1 && firstNum == 0)) {
+                if (carry) {
+                    carry = true;
+                    addedNumber[addedNumberIndex++] = 0;
+                } else {
+                    carry = false;
+                    addedNumber[addedNumberIndex++] = 1;
                 }
-            }
-            else if((firstNum==1 && secondNum==0) || (secondNum==1 && firstNum==0)){
-                if(carry){
-                    carry=true;
-                    addedNumber[addedNumberIndex++]=0;
-                }
-                else{
-                    carry=false;
-                    addedNumber[addedNumberIndex++]=1;
-                }
-            }
-            else{
+            } else {
                 // 1 to 1
-                carry=true;
-                addedNumber[addedNumberIndex++]=0;
-                }
+                carry = true;
+                addedNumber[addedNumberIndex++] = 0;
             }
+        }
         Reverse(addedNumber);
         return addedNumber;
     }
 
-    public static int[] ConvertIntToBinary(int number){
-        int numberAsBinary[]= new int[8];
-        int i=0;
-        while(number>0){
-            numberAsBinary[i]= number%2;
-            number/=2;
+    public static int[] ConvertIntToBinary ( int number){
+        int numberAsBinary[] = new int[8];
+        int i = 0;
+        while (number > 0) {
+            numberAsBinary[i] = number % 2;
+            number /= 2;
             ++i;
         }
-        int numberOfZeros=8-i;
-        for(int j=0; j<numberOfZeros;++j){
-            numberAsBinary[i]=0;
+        int numberOfZeros = 8 - i;
+        for (int j = 0; j < numberOfZeros; ++j) {
+            numberAsBinary[i] = 0;
             ++i;
         }
         //reverse the array
         return numberAsBinary;
     }
 
-    public static void DisplayTable(int MCand, int Multiplier, int Product)
-    {
+    public static void DisplayTable ( int MCand, int Multiplier, int Product){
         System.out.println("Iteration | Step        | Multiplicand      | Product");
-        for(int i = 0; i <=8; i++)
-        {
+        for (int i = 0; i <= 8; i++) {
             System.out.println("_______________________________________________________");
-            System.out.println(i + "         | " + Multiplier +"         | "+MCand+"          | "+ Product);
+            System.out.println(i + "         | " + Multiplier + "         | " + MCand + "          | " + Product);
         }
     }
 
-     public static void main(String[] args) {
-       int numberOne=0;
-       int numberTwo=0;
+    public static void Booths ()
+    {
+        // Da Da DAAAAAAAAAA
+    }
 
-       int numberOneAsBinary[]= new int[8];
-       int numberTwoasBinary[]= new int[8];
+    public static void main (String[]args){
+        int numberOne = 0;
+        int numberTwo = 0;
 
-        Scanner src= new Scanner(System.in);
+        int numberOneAsBinary[] = new int[8];
+        int numberTwoasBinary[] = new int[8];
+
+        Scanner src = new Scanner(System.in);
         System.out.println("Please Enter the Multiplicand");
-        numberOne=src.nextInt();
+        numberOne = src.nextInt();
         System.out.println("Please Enter the Multiplier");
-        numberTwo=src.nextInt();
+        numberTwo = src.nextInt();
 
-         // DisplayTable(numOneAsString);
-         //testing to make sure numbers work
-         /*
-         numberOneAsBinary=DetermineConversionFromUserNumber(numberOne);
-         numberTwoasBinary= DetermineConversionFromUserNumber(numberTwo);
-         System.out.println("Number One "+ numberOne + " as binary");
-         for(int i: numberOneAsBinary){
-             System.out.print(i + " ");
-         }
-         System.out.println();
+        // DisplayTable(numOneAsString);
 
-         System.out.println("Number Two "+ numberTwo + " as binary");
-         for(int i: numberTwoasBinary){
-             System.out.print(i + " ");
-         }
-         System.out.println("Numbers added together");
-         int[] add= Add(numberOneAsBinary,numberTwoasBinary);
-         for(int i: add){
-             System.out.print(i + " ");
+        numberOneAsBinary = DetermineConversionFromUserNumber(numberOne);
+        numberTwoasBinary = DetermineConversionFromUserNumber(numberTwo);
 
-         }
-         */
-         ShiftRight(numberOneAsBinary,numberTwoasBinary);
+
+        System.out.println("Number One " + numberOne + " as binary");
+        for (int i : numberOneAsBinary) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
+
+        System.out.println("Number Two " + numberTwo + " as binary");
+        for (int i : numberTwoasBinary) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
+    /*
+     System.out.println("Numbers added together");
+     int[] add= Add(numberOneAsBinary,numberTwoasBinary);
+     for(int i: add){
+         System.out.print(i + " ");
+
      }
+     */
+        ShiftRight(numberOneAsBinary,numberTwoasBinary);
+    }
 }
