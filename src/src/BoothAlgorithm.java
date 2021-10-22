@@ -24,7 +24,8 @@ public class BoothAlgorithm {
             return binary;
         }
         else{
-            int[] binary= NumberInTwoComplement(number);
+            int[] binary= ConvertIntToBinary(number*-1);
+             binary= NumberInTwoComplement(binary);
             Reverse(binary);
             return binary;
 
@@ -33,9 +34,8 @@ public class BoothAlgorithm {
     }
 
 
-    public static int[] NumberInTwoComplement(int number){
+    public static int[] NumberInTwoComplement(int[] twoComplement){
         //assume is postive for now then change the bits later
-        int[] twoComplement= ConvertIntToBinary(Math.abs(number));
         System.out.println("Number after conversion");
 
         for(int i: twoComplement){
@@ -131,7 +131,7 @@ public class BoothAlgorithm {
 
                 }
             }
-           Reverse(addedNumber);
+        Reverse(addedNumber);
         return addedNumber;
         }
 
@@ -218,8 +218,8 @@ public class BoothAlgorithm {
              System.out.print(i + " ");
          }
          System.out.println("Numbers added together");
-         Add(numberOneAsBinary,numberTwoasBinary);
-         for(int i: numberOneAsBinary){
+         int[] add= Add(numberOneAsBinary,numberTwoasBinary);
+         for(int i: add){
              System.out.print(i + " ");
 
          }
