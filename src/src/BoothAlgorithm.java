@@ -107,7 +107,9 @@ public class BoothAlgorithm {
        }
         System.out.println(" ");
 
+       for(int i=0; i<secondNumber.length-1;++i){
 
+       }
     }
     public static int[] Add(int [] firstBinaryNumber, int[] secondBinaryNumbers){
         int addedNumber[]= new int[8];
