@@ -36,11 +36,11 @@ public class BoothAlgorithm {
 
     public static int[] NumberInTwoComplement(int[] twoComplement){
         //assume is postive for now then change the bits later
-        System.out.println("Number after conversion");
+        /*System.out.println("Number after conversion");
 
         for(int i: twoComplement){
             System.out.print(i + " ");
-        }
+        }*/
         System.out.println();
         //flip the bits :)
         for(int i=0; i<twoComplement.length;++i){
@@ -50,9 +50,9 @@ public class BoothAlgorithm {
             else{
                 twoComplement[i]=0;
             }
-            System.out.print(twoComplement[i]+ " ");
+            //System.out.print(twoComplement[i]+ " ");
         }
-        System.out.println();
+       // System.out.println();
 
 
 
@@ -96,7 +96,7 @@ public class BoothAlgorithm {
     public static void ShiftRight(int[] firstNumber, int[] secondNumber){
         int signNumber= firstNumber[0];
         int carryOverNumber=firstNumber[firstNumber.length-1];
-        System.out.println("first number after shift ");
+       // System.out.println("first number after shift ");
         for(int i=0; i<firstNumber.length-1; ++i){
             firstNumber[i+1]=firstNumber[i];
 
@@ -105,11 +105,17 @@ public class BoothAlgorithm {
        for (int i: firstNumber ){
            System.out.print(i + " ");
        }
-        System.out.println(" ");
 
        for(int i=0; i<secondNumber.length-1;++i){
-
+            secondNumber[i+1]=secondNumber[i];
        }
+       secondNumber[0]=carryOverNumber;
+       System.out.print(" ");
+      // System.out.println("Second number after shift");
+        for (int i: secondNumber ){
+            System.out.print(i + " ");
+        }
+        System.out.println(" ");
     }
     public static int[] Add(int [] firstBinaryNumber, int[] secondBinaryNumbers){
         int addedNumber[]= new int[8];
@@ -225,25 +231,20 @@ public class BoothAlgorithm {
          //testing to make sure numbers work
          numberOneAsBinary=DetermineConversionFromUserNumber(numberOne);
          numberTwoasBinary= DetermineConversionFromUserNumber(numberTwo);
-         System.out.println("Number One "+ numberOne + " as binary");
-         for(int i: numberOneAsBinary){
-             System.out.print(i + " ");
-         }
-         System.out.println();
+         //System.out.println("Number One "+ numberOne + " as binary");
+        // for(int i: numberOneAsBinary){
+           //  System.out.print(i + " ");
+      //   }
+         /*System.out.println();
 
          System.out.println("Number Two "+ numberTwo + " as binary");
          for(int i: numberTwoasBinary){
              System.out.print(i + " ");
-         }
-         System.out.println("Numbers added together");
-         int[] add= Add(numberOneAsBinary,numberTwoasBinary);
-         for(int i: add){
-             System.out.print(i + " ");
+         }*/
 
-         }
          ShiftRight(numberOneAsBinary,numberTwoasBinary);
-         System.out.println();
-         System.out.println();
+         //System.out.println();
+         //System.out.println();
 
 
 
