@@ -1,10 +1,20 @@
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Scanner;
+import java.util.*;
 
 public class BoothAlgorithm {
     public final int MAX_BIT=8;
+
+
+    public static void Reverse(int[] arr){
+        int start=0;
+        int end= arr.length-1;
+        while (start<end){
+            int temp= arr[start];
+            arr[start]=arr[end];
+            arr[end]=temp;
+            ++start;
+            --end;
+        }
+    }
     public static int[] DetermineConversionFromUserNumber(int number){
 
         if(number>=0){
@@ -83,21 +93,53 @@ public class BoothAlgorithm {
         return twoComplement;
 
     }
-    public static String Add(){
-        return null;
-    }
+    public static int[] Add(int [] firstBinaryNumber, int[] secondBinaryNumbers){
+        int addedNumber[]= new int[8];
+        int addedNumberIndex=0;
+         boolean carry=false;
+        for(int i= firstBinaryNumber.length-1; i>0; --i){
+            int firstNum=firstBinaryNumber[i];
+            int secondNum= secondBinaryNumbers[i];
+            if(firstNum==0 && secondNum==0){
+                if(carry){
+                    addedNumber[addedNumberIndex++]=1;
+                    carry=false;
+                }
+                else{
+                    addedNumber[addedNumberIndex++]=0;
+                    carry=false;
+                }
 
-    public static void Reverse(int[] arr){
-        int start=0;
-        int end= arr.length-1;
-        while (start<end){
-            int temp= arr[start];
-            arr[start]=arr[end];
-            arr[end]=temp;
-            ++start;
-            --end;
+            }
+            else if((firstNum==1 && secondNum==0) || (secondNum==1 && firstNum==0)){
+                if(carry){
+                    carry=true;
+                    addedNumber[addedNumberIndex++]=0;
+                }
+                else{
+                    carry=false;
+                    addedNumber[addedNumberIndex++]=1;
+
+                }
+            }
+            else{
+                //1 1
+
+                    carry=true;
+                    addedNumber[addedNumberIndex++]=0;
+
+
+                }
+            }
+           Reverse(addedNumber);
+        return addedNumber;
         }
-    }
+
+
+
+
+
+
 
 
     public static int[] ConvertIntToBinary(int number){
@@ -175,6 +217,13 @@ public class BoothAlgorithm {
          for(int i: numberTwoasBinary){
              System.out.print(i + " ");
          }
+         System.out.println("Numbers added together");
+         Add(numberOneAsBinary,numberTwoasBinary);
+         for(int i: numberOneAsBinary){
+             System.out.print(i + " ");
+
+         }
+         System.out.println();
          System.out.println();
 
 
