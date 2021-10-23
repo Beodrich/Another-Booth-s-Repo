@@ -206,7 +206,5 @@ public class BoothAlgorithm {
          System.out.println();
          System.out.println("Shifted Right is:");
          ShiftRight(numberOneAsBinary,numberTwoasBinary);
-         //System.out.println();
-         //System.out.println();
      }
 }
