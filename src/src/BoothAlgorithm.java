@@ -3,7 +3,6 @@ import java.util.*;
 public class BoothAlgorithm {
     public final int MAX_BIT=8;
 
-
     public static void Reverse(int[] arr){
         int start=0;
         int end= arr.length-1;
@@ -15,10 +14,9 @@ public class BoothAlgorithm {
             --end;
         }
     }
+
     public static int[] DetermineConversionFromUserNumber(int number){
-
         if(number>=0){
-
             int[] binary= ConvertIntToBinary(number);
             Reverse(binary);
             return binary;
@@ -26,23 +24,13 @@ public class BoothAlgorithm {
         else{
             int[] binary= ConvertIntToBinary(number*-1);
             Reverse(binary);
-
             binary= NumberInTwoComplement(binary);
             return binary;
-
-
         }
     }
 
-
     public static int[] NumberInTwoComplement(int[] numberToConvert){
         //assume is postive for now then change the bits later
-        /*System.out.println("Number after conversion");
-
-        for(int i: twoComplement){
-            System.out.print(i + " ");
-        }*/
-        System.out.println();
         //flip the bits :)
         int oneComp[]= new int[8];
         for(int i=0; i<numberToConvert.length;++i){
@@ -52,15 +40,10 @@ public class BoothAlgorithm {
             else{
                 oneComp[i]=0;
             }
-            //System.out.print(twoComplement[i]+ " ");
         }
-       // System.out.println();
-
-
         int finalNumber[]= new int[8];
         boolean carry=true ;
         //do the magic of adding
-
         for(int i=oneComp.length-1; i>=0;--i){
             int currentNumber= oneComp[i];
             if(currentNumber==1 && carry){
@@ -94,33 +77,27 @@ public class BoothAlgorithm {
                 }
             }*/
         }
-
-
-
-
         return finalNumber;
-
     }
-    public static void ShiftRight(int[] firstNumber, int[] secondNumber){
-        int signNumber= firstNumber[0];
-        int carryOverNumber=firstNumber[firstNumber.length-1];
-       // System.out.println("first number after shift ");
-        for(int i=0; i<firstNumber.length-1; ++i){
-            firstNumber[i+1]=firstNumber[i];
-//
-        }
-        firstNumber[0]=signNumber;
-       for (int i: firstNumber ){
-           System.out.print(i + " ");
-       }
 
-       for(int i=0; i<secondNumber.length-1;++i){
-            secondNumber[i+1]=secondNumber[i];
-       }
-       secondNumber[0]=carryOverNumber;
-       System.out.print(" ");
-      // System.out.println("Second number after shift");
-        for (int i: secondNumber ){
+    public static void ShiftRight(int[] firstNumber, int[] secondNumber){
+        int signNumber = firstNumber[0];
+        int carryOverNumber = firstNumber[firstNumber.length - 1];
+
+        for (int i = firstNumber.length - 1; i >= 1; i--) {
+            firstNumber[i] = firstNumber[i - 1];
+        }
+        firstNumber[0] = signNumber;
+        for (int i : firstNumber) {
+            System.out.print(i + " ");
+        }
+        System.out.print(" ");
+
+        for (int i = secondNumber.length - 1; i >= 1; i--) {
+            secondNumber[i] = secondNumber[i - 1];
+        }
+        secondNumber[0] = carryOverNumber;
+        for (int i : secondNumber) {
             System.out.print(i + " ");
         }
         System.out.println(" ");
@@ -141,7 +118,6 @@ public class BoothAlgorithm {
                     addedNumber[addedNumberIndex++]=0;
                     carry=false;
                 }
-
             }
             else if((firstNum==1 && secondNum==0) || (secondNum==1 && firstNum==0)){
                 if(carry){
@@ -151,40 +127,20 @@ public class BoothAlgorithm {
                 else{
                     carry=false;
                     addedNumber[addedNumberIndex++]=1;
-
                 }
             }
             else{
                 //1 1
-
-                    carry=true;
-                    addedNumber[addedNumberIndex++]=0;
-
-
+                carry=true;
+                addedNumber[addedNumberIndex++]=0;
                 }
             }
         Reverse(addedNumber);
         return addedNumber;
         }
 
-
-
-
-
-
-
-
     public static int[] ConvertIntToBinary(int number){
         int numberAsBinary[]= new int[8];
-
-        // Built-In Java Function that converts int to a binary string
-        //  TODO: This does not fully work normally with negative numbers yet
-
-        //should return an array rep of the binary number
-       // String result = Integer.toBinaryString(number);
-
-        //String resultWithPadding = String.format("%8s", result).
-          //      replaceAll(" ", "0");  // 8-bit Integer
         int i=0;
         while(number>0){
             numberAsBinary[i]= number%2;
@@ -196,13 +152,11 @@ public class BoothAlgorithm {
             numberAsBinary[i]=0;
             ++i;
         }
-
         //reverse the array
         return numberAsBinary;
     }
 
-    public static void DisplayTable(String MCand)
-    {
+    public static void DisplayTable(String MCand) {
         System.out.println("Iteration | Step        | Multiplicand      | Product");
         for(int i = 0; i <=8; i++)
         {
@@ -218,15 +172,13 @@ public class BoothAlgorithm {
        int numberOneAsBinary[]= new int[8];
        int numberTwoasBinary[]= new int[8];
 
-
         System.out.println("hello cole");
         System.out.println("Hello Ben!");
         System.out.println("I feel nothing but pain :)");
         System.out.println("Turn to the Darkside young Padawan ;)");
-         System.out.println("Hello Darkness my old friend ");
+        System.out.println("Hello Darkness my old friend ");
 
-
-         Scanner src= new Scanner(System.in);
+        Scanner src= new Scanner(System.in);
         System.out.println("Please Enter the Multiplicand");
         numberOne=src.nextInt();
         System.out.println("Please Enter the Multiplier");
@@ -247,16 +199,14 @@ public class BoothAlgorithm {
          }
          System.out.println();
 
-        /* System.out.println("Number Two "+ numberTwo + " as binary");
+         System.out.println("Number Two "+ numberTwo + " as binary");
          for(int i: numberTwoasBinary){
              System.out.print(i + " ");
-         }*/
-
-         //ShiftRight(numberOneAsBinary,numberTwoasBinary);
+         }
+         System.out.println();
+         System.out.println("Shifted Right is:");
+         ShiftRight(numberOneAsBinary,numberTwoasBinary);
          //System.out.println();
          //System.out.println();
-
-
-
      }
 }
