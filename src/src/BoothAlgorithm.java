@@ -1,3 +1,4 @@
+import java.awt.print.Printable;
 import java.util.*;
 
 public class BoothAlgorithm {
@@ -155,34 +156,52 @@ public class BoothAlgorithm {
         //reverse the array
         return numberAsBinary;
     }
-
-    public static void DisplayTable(String MCand) {
-        System.out.println("Iteration | Step        | Multiplicand      | Product");
-        for(int i = 0; i <=8; i++)
-        {
-            System.out.println("_______________________________________________________");
-            System.out.println(i + "         | Step        | "+MCand+"          | Product");
+    public static String PrintArray(int[] number){
+        String num="";
+        for(int i: number){
+            num+=i;
         }
+        return num;
     }
+    public static void DisplayTable(String currentIteration, String step, int[]mcand, int[]productFirst, int[]productSecond) {
+
+
+            System.out.println("_______________________________________________________");
+            System.out.println(currentIteration + "         | " + step + "         | "+ PrintArray(mcand)+ "\t|" + PrintArray(productFirst)+ PrintArray(productSecond));
+
+    }
+
     public static void DoTheBooth(int[]mCand, int[]multi){
+        System.out.println("Iteration | Step        | Multiplicand      | Product");
         int[] secondHalf= new int[9];
         int[] firstHalf= new int[8];
+        String step="";
         for(int i=0; i<8; ++i){
             secondHalf[i]=multi[i];
-            firstHalf[i]=0;
         }
         secondHalf[8]=0;
+        DisplayTable(0, "Init", mCand,firstHalf,secondHalf);
         for(int i=0; i<8;++i){
             //0 1 and 1 0
             int firstNum= secondHalf[secondHalf.length-2];
             int secondNum= secondHalf[secondHalf.length-1];
             if(firstNum==1 && secondNum==0){
                 firstHalf=Add(firstHalf,NumberInTwoComplement(mCand));
+                step="Prod= Prod-Mcand\nShiftRight";
+                DisplayTable((i+1), step, mCand, firstHalf,secondHalf);
             }
             else if(firstNum==0 && secondNum==1){
                 firstHalf=Add(firstHalf,mCand);
+                step="Prod= Prod+Mcand\nShiftRight";
+
+            }
+            else{
+                step="No Op\nShiftRight";
+
             }
             ShiftRight(firstHalf,secondHalf);
+           // DisplayTable(i+1,step,mCand,firstHalf,secondHalf);
+
         }
         System.out.println("final number is ");
         for(int i: firstHalf){
