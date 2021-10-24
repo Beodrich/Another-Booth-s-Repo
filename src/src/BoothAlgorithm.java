@@ -188,7 +188,7 @@ public class BoothAlgorithm {
             if(firstNum==1 && secondNum==0){
                 firstHalf=Add(firstHalf,NumberInTwoComplement(mCand));
                 step="Prod= Prod-Mcand\nShiftRight";
-                DisplayTable((i+1), step, mCand, firstHalf,secondHalf);
+                DisplayTable(String.valueOf(i+1), step, mCand, firstHalf,secondHalf);
             }
             else if(firstNum==0 && secondNum==1){
                 firstHalf=Add(firstHalf,mCand);
