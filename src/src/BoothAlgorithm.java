@@ -16,20 +16,19 @@ public class BoothAlgorithm {
         }
     }
     public static void BinaryToDecimal(int[]first, int[]second){
-        int[] combine = new int[16];
+        String combo="";
         int dec=0;
+        Arrays.copyOf(second,second.length-1);
         for(int i=0; i<first.length;++i){
-            combine[i]=first[i];
+            combo+=first[i];
+
         }
-        int index=7;
-        for(int i=0; i<second.length-1;++i){
-            combine[index++]= second[i];
+        for(int i=0; i<second.length;++i){
+            combo+=second[i];
         }
-        Reverse(combine);
-        for(int i=0; i<combine.length;++i){
-            dec+=combine[i] * Math.pow(2,i);
-        }
-        System.out.println("The Decimal number is "+ dec);
+
+        System.out.println(combo);
+        System.out.println("The Decimal number is "+ Integer.parseInt(combo,2));
 
     }
     public static int[] DetermineConversionFromUserNumber(int number){
@@ -233,6 +232,7 @@ public class BoothAlgorithm {
         for(int i: firstHalf){
             System.out.print(i + " ");
         }
+        System.out.print(" ");
         for(int i=0; i<8;++i){
             System.out.print(secondHalf[i] + " ");
         }
