@@ -237,6 +237,7 @@ public class BoothAlgorithm {
             System.out.print(secondHalf[i] + " ");
         }
         System.out.println();
+        System.out.println();
         BinaryToDecimal(firstHalf,secondHalf);
     }
 
