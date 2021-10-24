@@ -17,18 +17,18 @@ public class BoothAlgorithm {
     }
     public static void BinaryToDecimal(int[]first, int[]second){
         String combo="";
+
         int dec=0;
-        Arrays.copyOf(second,second.length-1);
         for(int i=0; i<first.length;++i){
             combo+=first[i];
 
         }
-        for(int i=0; i<second.length;++i){
+        for(int i=0; i<second.length-1;++i){
             combo+=second[i];
         }
 
-        System.out.println(combo);
         System.out.println("The Decimal number is "+ Integer.parseInt(combo,2));
+
 
     }
     public static int[] DetermineConversionFromUserNumber(int number){
@@ -236,6 +236,7 @@ public class BoothAlgorithm {
         for(int i=0; i<8;++i){
             System.out.print(secondHalf[i] + " ");
         }
+        System.out.println();
         BinaryToDecimal(firstHalf,secondHalf);
     }
 
