@@ -164,6 +164,40 @@ public class BoothAlgorithm {
             System.out.println(i + "         | Step        | "+MCand+"          | Product");
         }
     }
+    public static void DoTheBooth(int[]mCand, int[]multi){
+        int[] secondHalf= new int[9];
+        int[] firstHalf= new int[8];
+        for(int i=0; i<8; ++i){
+            secondHalf[i]=multi[i];
+            firstHalf[i]=0;
+        }
+        secondHalf[8]=0;
+        for(int i=0; i<8;++i){
+            //0 1 and 1 0
+            int firstNum= secondHalf[secondHalf.length-2];
+            int secondNum= secondHalf[secondHalf.length-1];
+            if(firstNum==1 && secondNum==0){
+                firstHalf=Add(firstHalf,NumberInTwoComplement(mCand));
+            }
+            else if(firstNum==0 && secondNum==1){
+                firstHalf=Add(firstHalf,mCand);
+            }
+            ShiftRight(firstHalf,secondHalf);
+        }
+        System.out.println("final number is ");
+        for(int i: firstHalf){
+            System.out.print(i + " ");
+        }
+        for(int i=0; i<8;++i){
+            System.out.print(secondHalf[i] + " ");
+        }
+
+
+
+
+
+
+    }
 
      public static void main(String[] args) {
        int numberOne=0;
@@ -186,14 +220,14 @@ public class BoothAlgorithm {
          //numberOneAsBinary=ConvertIntToBinary(numberOne);
         //numberTwoasBinary=ConvertIntToBinary(numberTwo);
 
-         /*System.out.println("first number "+ numberOne+" as a binary number is: "+ numOneAsString +
-                 " and the second number "+ numberTwo+" a binary number is: "+ numTwoAsString);*/
+         //System.out.println("first number "+ numberOne+" as a binary number is: "+ numOneAsString +
+               //  " and the second number "+ numberTwo+" a binary number is: "+ numTwoAsString);*/
 
          // DisplayTable(numOneAsString);
          //testing to make sure numbers work
          numberOneAsBinary=DetermineConversionFromUserNumber(numberOne);
          numberTwoasBinary= DetermineConversionFromUserNumber(numberTwo);
-         System.out.println("Number One "+ numberOne + " as binary");
+         /*System.out.println("Number One "+ numberOne + " as binary");
          for(int i: numberOneAsBinary){
              System.out.print(i + " ");
          }
@@ -205,6 +239,7 @@ public class BoothAlgorithm {
          }
          System.out.println();
          System.out.println("Shifted Right is:");
-         ShiftRight(numberOneAsBinary,numberTwoasBinary);
+         ShiftRight(numberOneAsBinary,numberTwoasBinary);*/
+         DoTheBooth(numberOneAsBinary,numberTwoasBinary);
      }
 }
