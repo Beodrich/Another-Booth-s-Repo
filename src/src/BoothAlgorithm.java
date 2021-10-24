@@ -1,4 +1,5 @@
 import java.awt.print.Printable;
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class BoothAlgorithm {
@@ -16,18 +17,36 @@ public class BoothAlgorithm {
         }
     }
     public static void BinaryToDecimal(int[]first, int[]second){
-        String combo="";
+   String combo="";
+   boolean isNegative=false;
+   int[] comboArray= new int[first.length+ second.length];
+   int index= second.length-1;
+   for(int i=0; i< first.length;++i){
+       comboArray[i]= first[i];
+       comboArray[index+1]= second[i];
+       ++index;
+   }
+  if(comboArray[0]==1){
+      comboArray=NumberInTwoComplement(comboArray);
+      isNegative=true;
+  }
 
-        int dec=0;
-        for(int i=0; i<first.length;++i){
-            combo+=first[i];
+  int currentIndex=0;
+  int num=0;
+    for(int i=comboArray.length-1; i>=0; --i){
+        num+=comboArray[i]* Math.pow(2,currentIndex);
+        currentIndex++;
+    }
+    if(isNegative){
+        num*=-1;
+    }
+    System.out.println(" the num is "+ num);
 
-        }
-        for(int i=0; i<second.length-1;++i){
-            combo+=second[i];
-        }
 
-        System.out.println("The Decimal number is "+ Integer.parseInt(combo,2));
+
+
+       // System.out.println("the decimal number is "+ (int)dec);
+
 
 
     }
@@ -48,7 +67,7 @@ public class BoothAlgorithm {
     public static int[] NumberInTwoComplement(int[] numberToConvert){
         //assume is postive for now then change the bits later
         //flip the bits :)
-        int oneComp[]= new int[8];
+        int oneComp[]= new int[numberToConvert.length];
         for(int i=0; i<numberToConvert.length;++i){
             if(numberToConvert[i]==0){
                 oneComp[i]=1;
@@ -57,7 +76,7 @@ public class BoothAlgorithm {
                 oneComp[i]=0;
             }
         }
-        int finalNumber[]= new int[8];
+        int finalNumber[]= new int[numberToConvert.length];
         boolean carry=true ;
         //do the magic of adding
         for(int i=oneComp.length-1; i>=0;--i){
@@ -238,7 +257,7 @@ public class BoothAlgorithm {
         }
         System.out.println();
         System.out.println();
-        BinaryToDecimal(firstHalf,secondHalf);
+        BinaryToDecimal(firstHalf,Arrays.copyOf(secondHalf,secondHalf.length-1));
     }
 
     public static void main(String[] args) {
