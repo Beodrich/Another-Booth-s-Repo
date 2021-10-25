@@ -27,10 +27,12 @@ public class BoothAlgorithm {
        ++index;
    }*/
         for(int i: first){
-            comboArray[index++]=i;
+            comboArray[index]=i;
+            ++index;
         }
         for(int i: second){
-            comboArray[index++]=i;
+            comboArray[index]=i;
+            ++index;
         }
   if(comboArray[0]==1){
       comboArray=NumberInTwoComplement(comboArray);
