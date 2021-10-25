@@ -20,12 +20,18 @@ public class BoothAlgorithm {
    String combo="";
    boolean isNegative=false;
    int[] comboArray= new int[first.length+ second.length];
-   int index= second.length-1;
-   for(int i=0; i< first.length;++i){
+   int index=0;
+   /*for(int i=0; i< first.length;++i){
        comboArray[i]= first[i];
        comboArray[index+1]= second[i];
        ++index;
-   }
+   }*/
+        for(int i: first){
+            comboArray[index++]=i;
+        }
+        for(int i: second){
+            comboArray[index++]=i;
+        }
   if(comboArray[0]==1){
       comboArray=NumberInTwoComplement(comboArray);
       isNegative=true;
