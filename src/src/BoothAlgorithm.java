@@ -48,7 +48,8 @@ public class BoothAlgorithm {
     if(isNegative){
         num*=-1;
     }
-    System.out.println(" the num is "+ num);
+    System.out.println("The Decimal is: "+ num);
+    System.out.println();
 
 
 
@@ -300,7 +301,6 @@ public class BoothAlgorithm {
         for(int i=0; i<8;++i){
             System.out.print(secondHalf[i] + " ");
         }
-        System.out.println();
         System.out.println();
         BinaryToDecimal(firstHalf,Arrays.copyOf(secondHalf,secondHalf.length-1));
     }
