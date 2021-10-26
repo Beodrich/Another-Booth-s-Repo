@@ -73,9 +73,36 @@ public class BoothAlgorithm {
     }
 
     public static int[] NumberInTwoComplement(int[] numberToConvert){
+
+
+
+
+        int[] oneComp=new int[numberToConvert.length];
+        int[]twoComp= new int[numberToConvert.length];
+        int carry=1;
+        for(int i=0; i<numberToConvert.length;++i){
+            if(numberToConvert[i]==0){
+                oneComp[i]=1;
+            }
+            else {
+                oneComp[i]=0;
+            }
+        }
+        for(int i=numberToConvert.length-1; i>=0; --i){
+            if(oneComp[i]==1 && carry==1){
+                twoComp[i]=0;
+            }
+            else if(oneComp[i]==0 && carry==1){
+                twoComp[i]=1;
+                carry=0;
+            }
+            else {
+                twoComp[i]=oneComp[i];
+            }
+        }
         //assume is postive for now then change the bits later
         //flip the bits :)
-        int oneComp[]= new int[numberToConvert.length];
+       /* int oneComp[]= new int[numberToConvert.length];
         for(int i=0; i<numberToConvert.length;++i){
             if(numberToConvert[i]==0){
                 oneComp[i]=1;
@@ -84,8 +111,10 @@ public class BoothAlgorithm {
                 oneComp[i]=0;
             }
         }
+        boolean carry=true;
+
         int finalNumber[]= new int[numberToConvert.length];
-        boolean carry=true ;
+
         //do the magic of adding
         for(int i=oneComp.length-1; i>=0;--i){
             int currentNumber= oneComp[i];
@@ -99,28 +128,8 @@ public class BoothAlgorithm {
             else{
                 finalNumber[i]= oneComp[i];
             }
-            //this would be the 0 + 1 case
-            /*if(currentNumber==0){
-                if(carry){
-
-                    twoComplement[i]=1;
-                    break;
-                }
-
-            }
-            //this would be the 1 +1 case
-            else{
-                if(carry){
-                    twoComplement[i]=0;
-                    carry=true;
-                }
-                else{
-                    twoComplement[i]=1;
-                    break;
-                }
-            }*/
-        }
-        return finalNumber;
+        }*/
+        return twoComp;
     }
 
     public static void ShiftRight(int[] firstNumber, int[] secondNumber){
@@ -146,6 +155,18 @@ public class BoothAlgorithm {
         System.out.println(" ");*/
     }
     public static int[] Add(int [] firstBinaryNumber, int[] secondBinaryNumbers){
+       /* int carry=0;
+        for(int i=0; i<firstBinaryNumber.length;++i){
+            firstBinaryNumber[i]=firstBinaryNumber[i]+ secondBinaryNumbers[i]+carry;
+            if(firstBinaryNumber[i]>1){
+                firstBinaryNumber[i]=firstBinaryNumber[i] %2;
+                carry=1;
+            }
+            else {
+                carry=0;
+            }
+        }
+        return firstBinaryNumber;*/
         int addedNumber[]= new int[8];
         int addedNumberIndex=0;
         boolean carry=false;
@@ -174,8 +195,16 @@ public class BoothAlgorithm {
             }
             else{
                 //1 1
+                if (carry)
+                {
+                    addedNumber[addedNumberIndex++]=1;
+                }
+                else
+                {
+                    addedNumber[addedNumberIndex++]=0;
+                }
                 carry=true;
-                addedNumber[addedNumberIndex++]=0;
+
             }
         }
         Reverse(addedNumber);
@@ -223,6 +252,9 @@ public class BoothAlgorithm {
         System.out.println("Iteration |      Step              | Multiplicand  | Product");
         int[] secondHalf= new int[9];
         int[] firstHalf= new int[8];
+        for(int i=0; i<firstHalf.length;++i){
+            firstHalf[i]=0;
+        }
 
         int[] B_secondHalf= new int[9];
         int[] B_firstHalf= new int[8];
@@ -237,8 +269,13 @@ public class BoothAlgorithm {
             int firstNum= secondHalf[secondHalf.length-2];
             int secondNum= secondHalf[secondHalf.length-1];
             if(firstNum==1 && secondNum==0){
-                firstHalf=Add(firstHalf,NumberInTwoComplement(mCand));
-                step="Prod=Prod-Mcand";
+                int[] temp= mCand.clone();
+                //if we have a negative its a situation of 0--9==9
+                    firstHalf=Add(firstHalf,NumberInTwoComplement(temp));
+                    step="Prod=Prod-Mcand";
+                    //firstHalf=NumberInTwoComplement(firstHalf);
+
+
             }
             else if(firstNum==0 && secondNum==1){
                 firstHalf=Add(firstHalf,mCand);
@@ -269,46 +306,38 @@ public class BoothAlgorithm {
     }
 
     public static void main(String[] args) {
-        int numberOne=0;
-        int numberTwo=0;
+        char userInput = 'y';
+        Scanner src = new Scanner(System.in);
+        System.out.println("Would you like do another round of Booth's Algorithm type y/n");
+        userInput=src.next().charAt(0);
+        while (userInput =='y') {
 
-        int numberOneAsBinary[]= new int[8];
-        int numberTwoasBinary[]= new int[8];
 
-        System.out.println("hello cole");
-        System.out.println("Hello Ben!");
-        System.out.println("I feel nothing but pain :)");
-        System.out.println("Turn to the Darkside young Padawan ;)");
-        System.out.println("Hello Darkness my old friend ");
+            int numberOne = 0;
+            int numberTwo = 0;
 
-        Scanner src= new Scanner(System.in);
-        System.out.println("Please Enter the Multiplicand");
-        numberOne=src.nextInt();
-        System.out.println("Please Enter the Multiplier");
-        numberTwo=src.nextInt();
-        //numberOneAsBinary=ConvertIntToBinary(numberOne);
-        //numberTwoasBinary=ConvertIntToBinary(numberTwo);
+            int numberOneAsBinary[] = new int[8];
+            int numberTwoasBinary[] = new int[8];
 
-        //System.out.println("first number "+ numberOne+" as a binary number is: "+ numOneAsString +
-        //  " and the second number "+ numberTwo+" a binary number is: "+ numTwoAsString);*/
+            System.out.println("hello cole");
+            System.out.println("Hello Ben!");
+            System.out.println("I feel nothing but pain :)");
+            System.out.println("Turn to the Darkside young Padawan ;)");
+            System.out.println("Hello Darkness my old friend ");
 
-        // DisplayTable(numOneAsString);
-        //testing to make sure numbers work
-        numberOneAsBinary=DetermineConversionFromUserNumber(numberOne);
-        numberTwoasBinary= DetermineConversionFromUserNumber(numberTwo);
-         /*System.out.println("Number One "+ numberOne + " as binary");
-         for(int i: numberOneAsBinary){
-             System.out.print(i + " ");
-         }
-         System.out.println();
+            System.out.println("Please Enter the Multiplicand");
+            numberOne = src.nextInt();
+            System.out.println("Please Enter the Multiplier");
+            numberTwo = src.nextInt();
 
-         System.out.println("Number Two "+ numberTwo + " as binary");
-         for(int i: numberTwoasBinary){
-             System.out.print(i + " ");
-         }
-         System.out.println();
-         System.out.println("Shifted Right is:");
-         ShiftRight(numberOneAsBinary,numberTwoasBinary);*/
-        DoTheBooth(numberOneAsBinary,numberTwoasBinary);
+            numberOneAsBinary = DetermineConversionFromUserNumber(numberOne);
+            numberTwoasBinary = DetermineConversionFromUserNumber(numberTwo);
+
+            DoTheBooth(numberOneAsBinary, numberTwoasBinary);
+            System.out.println("Would you like do another round of Booth's Algorithm type y/n");
+            userInput=src.next().charAt(0);
+
+
+        }
     }
 }
