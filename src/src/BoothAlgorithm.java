@@ -1,9 +1,6 @@
-import java.awt.print.Printable;
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class BoothAlgorithm {
-    public final int MAX_BIT=8;
 
     public static void Reverse(int[] arr){
         int start=0;
