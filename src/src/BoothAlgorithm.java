@@ -319,12 +319,6 @@ public class BoothAlgorithm {
             int numberOneAsBinary[] = new int[8];
             int numberTwoasBinary[] = new int[8];
 
-            System.out.println("hello cole");
-            System.out.println("Hello Ben!");
-            System.out.println("I feel nothing but pain :)");
-            System.out.println("Turn to the Darkside young Padawan ;)");
-            System.out.println("Hello Darkness my old friend ");
-
             System.out.println("Please Enter the Multiplicand");
             numberOne = src.nextInt();
             System.out.println("Please Enter the Multiplier");
